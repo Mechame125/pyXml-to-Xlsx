@@ -15,9 +15,9 @@ print()
 print('  *******  EXTRAER DATOS DE .XML A .XLSX******* ')
 print()
 
-ruta = "D:\\Documentos\\Examples\\pyLeerXML\\"
+ruta = "D:\\Documentos\\MECH\\GitHub\\DANE\\"
 fileXml = os.listdir(ruta)
-print(' ARHIVOS  XML AGREGADOS ')
+print(' ARHIVOS EN CARPETA')
 print(fileXml)
 print()
 
@@ -30,6 +30,7 @@ for file in fileXml:
     # Llama todos los archivos que terminen en .xml
     if (file.endswith('.xml')):
       lstId = []
+      print(file)
       p = pathlib.Path(file).absolute()     
       tree = ET.parse(p)
       sz = os.stat(p).st_size
@@ -40,7 +41,6 @@ for file in fileXml:
       dpMp = 0    # Valor id del lugar
       noSpv = 0   # Valor id de servidor
       noRcl = 0   # Valor id de cliente
-      noHg = 0    # Valor cantidad de hogares 
       fch = ''    # Valor fecha actual
       
       # Busca los valores desde la parte externa hacia la parte interna
@@ -53,25 +53,25 @@ for file in fileXml:
       
           for T_1_3 in root.findall('T_1_3'):
             noSpv = T_1_3.find('P7S2').text
-      
-            for Hogares_count in root.findall('Hogares_count'):
-              noHg = Hogares_count.find('P7S3').text
 
-              for Hogares in root.findall('Hogares'):
-                  noPsn = Hogares.find('Registro_count').text
+            for Hogares in root.findall('Hogares'):
+                noPsn = Hogares.find('Registro_count').text
                   
       # Muestro en pantalla los valores obtenidos
-      print(dpMp, noSpv, noRcl, noHg, noPsn, file, szkb,fch)
+      print(dpMp, noSpv, noRcl, noPsn, file, szkb,fch)
       
       # En la hoja results organizo el orden como me quedarán guardados los valores
-      results = [[dpMp, noSpv, noRcl, noHg, noPsn, file, szkb, fch]]
+      results = [[dpMp, noSpv, noRcl, noPsn, file, szkb, fch]]
       
       # El resultado de un archivo queda guardado en una fila
       for row in results:
         ws.append(row)
 
       # Guardamos los valores en el excel
-      wb.save('temporal_info.xlsx') 
+      wb.save('temporal_Encuesta.xlsx')
       print()
 
 print('Listo')
+
+
+#---Mec.
