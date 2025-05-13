@@ -7,7 +7,7 @@ Desde cualquier carpeta, el código primero lee la cantidad de documentos en la 
             ruta = "D:\\Documentos\\Examples\\pyLeerXML\\"
             fileXml = os.listdir(ruta)
 
-Después, se crea un excel workbook para empezar a almacenar la información,
+Después, en un archivo de excel existente para almacenar la información,
     
                 
             wb = Workbook()  
